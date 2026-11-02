@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { cn } from "../utils/cn";
 import { Icon, Eyebrow, Ornament, Reveal } from "./common";
 import PaymentModal, { SuccessModal, type PendingDonation } from "./PaymentModal";
@@ -9,6 +10,7 @@ import { rupiah } from "../utils/time";
 
 export default function WakafForm() {
   const toast = useToast();
+  const navigate = useNavigate();
 
   const [selected, setSelected] = useState(packages[1].id);
   const [method, setMethod] = useState("qris");
@@ -370,7 +372,7 @@ export default function WakafForm() {
         onClose={() => setSuccess(null)}
         onViewWall={() => {
           setSuccess(null);
-          document.getElementById("doa")?.scrollIntoView({ behavior: "smooth" });
+          navigate("/laporan#doa");
         }}
       />
     </section>

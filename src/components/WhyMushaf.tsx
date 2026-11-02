@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Icon, Eyebrow, Reveal } from "./common";
 import { reasons, specs } from "../data";
 
@@ -118,13 +119,13 @@ export function Mushaf() {
           </ul>
 
           <Reveal delay={200}>
-            <a
-              href="#wakaf"
+            <Link
+              to="/wakaf"
               className="mt-10 inline-flex items-center gap-3 rounded-full bg-cream px-7 py-4 text-sm font-bold text-emerald-900 transition hover:bg-gold-300"
             >
               Lihat paket wakaf
               <Icon name="arrow" className="h-4 w-4" />
-            </a>
+            </Link>
           </Reveal>
         </div>
       </div>

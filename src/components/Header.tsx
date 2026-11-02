@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import { cn } from "../utils/cn";
 import { Icon } from "./common";
 
 const links = [
-  { href: "#cerita", label: "Cerita" },
-  { href: "#keutamaan", label: "Keutamaan" },
-  { href: "#wakaf", label: "Wakaf" },
-  { href: "#doa", label: "Dinding Doa" },
-  { href: "#penyaluran", label: "Penyaluran" },
-  { href: "#tanya", label: "Tanya Jawab" },
+  { to: "/", label: "Beranda", end: true },
+  { to: "/tentang", label: "Tentang Kami" },
+  { to: "/wakaf", label: "Wakaf" },
+  { to: "/laporan", label: "Laporan & Doa" },
 ];
 
 export function Logo({ tone = "light" }: { tone?: "light" | "dark" }) {
   return (
-    <a href="#top" className="group flex items-center gap-3">
+    <Link to="/" className="group flex items-center gap-3">
       <span className="relative grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-gold-300 to-gold-500 shadow-lg shadow-gold-500/25">
         <svg viewBox="0 0 24 24" className="h-6 w-6 text-emerald-900" aria-hidden="true">
           <path
@@ -40,13 +39,18 @@ export function Logo({ tone = "light" }: { tone?: "light" | "dark" }) {
           Amal Qur'an
         </span>
       </span>
-    </a>
+    </Link>
   );
 }
 
 export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -67,24 +71,32 @@ export default function Header() {
 
         <nav className="hidden items-center gap-1 lg:flex">
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              className="rounded-full px-3.5 py-2 text-sm font-medium text-cream-200/85 transition hover:bg-white/10 hover:text-white"
+            <NavLink
+              key={l.to}
+              to={l.to}
+              end={l.end}
+              className={({ isActive }) =>
+                cn(
+                  "rounded-full px-3.5 py-2 text-sm font-medium transition",
+                  isActive
+                    ? "bg-gold-400/15 text-gold-200"
+                    : "text-cream-200/85 hover:bg-white/10 hover:text-white",
+                )
+              }
             >
               {l.label}
-            </a>
+            </NavLink>
           ))}
         </nav>
 
         <div className="flex items-center gap-3">
-          <a
-            href="#wakaf"
+          <Link
+            to="/wakaf"
             className="hidden items-center gap-2 rounded-full bg-gradient-to-r from-gold-300 to-gold-500 px-5 py-2.5 text-sm font-bold text-emerald-950 shadow-lg shadow-gold-500/25 transition hover:brightness-110 sm:inline-flex"
           >
             Wakaf Sekarang
             <Icon name="arrow" className="h-4 w-4" />
-          </a>
+          </Link>
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
@@ -119,22 +131,26 @@ export default function Header() {
       >
         <nav className="mx-4 mt-3 grid gap-1 rounded-2xl border border-white/10 bg-emerald-900/95 p-3 shadow-2xl">
           {links.map((l) => (
-            <a
-              key={l.href}
-              href={l.href}
-              onClick={() => setOpen(false)}
-              className="rounded-xl px-4 py-3 text-sm font-medium text-cream-200 transition hover:bg-white/10"
+            <NavLink
+              key={l.to}
+              to={l.to}
+              end={l.end}
+              className={({ isActive }) =>
+                cn(
+                  "rounded-xl px-4 py-3 text-sm font-medium transition",
+                  isActive ? "bg-gold-400/15 text-gold-200" : "text-cream-200 hover:bg-white/10",
+                )
+              }
             >
               {l.label}
-            </a>
+            </NavLink>
           ))}
-          <a
-            href="#wakaf"
-            onClick={() => setOpen(false)}
+          <Link
+            to="/wakaf"
             className="mt-1 rounded-xl bg-gold-400 px-4 py-3 text-center text-sm font-bold text-emerald-950"
           >
             Wakaf Mushaf Sekarang
-          </a>
+          </Link>
         </nav>
       </div>
     </header>

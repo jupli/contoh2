@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { cn } from "../utils/cn";
 import { Icon, Eyebrow, Ornament, Reveal } from "./common";
 import { faqs, WA_NUMBER } from "../data";
@@ -129,13 +130,13 @@ export function ClosingCta() {
         </Reveal>
         <Reveal delay={200}>
           <div className="mt-10 flex flex-wrap justify-center gap-4">
-            <a
-              href="#wakaf"
+            <Link
+              to="/wakaf"
               className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-gold-300 to-gold-500 px-8 py-4 text-sm font-bold text-emerald-950 shadow-xl shadow-gold-500/20 transition hover:brightness-110"
             >
               Wakaf Mushaf Sekarang
               <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" />
-            </a>
+            </Link>
             <a
               href={`https://wa.me/${WA_NUMBER}`}
               target="_blank"
@@ -156,15 +157,18 @@ export function ClosingCta() {
 const footerLinks = [
   {
     title: "Program",
+    to: "/wakaf",
     items: ["Wakaf Mushaf", "Sedekah Mushaf", "Rak Mushaf Masjid", "Patungan Mushaf"],
   },
   {
     title: "Informasi",
-    items: ["Laporan Penyaluran", "Cara Berwakaf", "Sertifikat Wakaf", "Mitra Lembaga"],
+    to: "/laporan",
+    items: ["Laporan Penyaluran", "Dinding Doa", "Sertifikat Wakaf", "Mitra Lembaga"],
   },
   {
     title: "Bantuan",
-    items: ["Hubungi Admin", "Konfirmasi Donasi", "Syarat & Ketentuan", "Kebijakan Privasi"],
+    to: "/tentang",
+    items: ["Hubungi Admin", "Konfirmasi Donasi", "Tanya Jawab", "Kebijakan Privasi"],
   },
 ];
 
@@ -204,12 +208,12 @@ export function Footer() {
                 <ul className="mt-5 space-y-3">
                   {col.items.map((item) => (
                     <li key={item}>
-                      <a
-                        href="#wakaf"
+                      <Link
+                        to={col.to}
                         className="text-sm text-cream-200/65 transition hover:text-gold-200"
                       >
                         {item}
-                      </a>
+                      </Link>
                     </li>
                   ))}
                 </ul>

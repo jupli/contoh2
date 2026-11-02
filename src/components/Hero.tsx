@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Icon, Eyebrow, Reveal } from "./common";
 import { marqueeWords } from "../data";
 
@@ -67,13 +68,13 @@ export default function Hero() {
 
           <Reveal delay={260}>
             <div className="mt-9 flex flex-wrap items-center gap-4">
-              <a
-                href="#wakaf"
+              <Link
+                to="/wakaf"
                 className="group inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-gold-300 to-gold-500 px-7 py-4 text-sm font-bold text-emerald-950 shadow-xl shadow-gold-500/25 transition hover:brightness-110"
               >
                 Bismillah, Saya Wakaf
                 <Icon name="arrow" className="h-4 w-4 transition group-hover:translate-x-1" />
-              </a>
+              </Link>
               <a
                 href="#cerita"
                 className="inline-flex items-center gap-2 rounded-full border border-white/25 px-7 py-4 text-sm font-semibold text-cream-100 transition hover:bg-white/10"
